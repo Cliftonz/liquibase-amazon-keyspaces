@@ -1,31 +1,15 @@
-liquibase-cassandra [![Build and Test Extention](https://github.com/liquibase/liquibase-cassandra/actions/workflows/build.yml/badge.svg)](https://github.com/liquibase/liquibase-cassandra/actions/workflows/build.yml)
+# liquibase-cassandra 
+<!--[![Build and Test Extention](https://github.com/liquibase/liquibase-cassandra/actions/workflows/build.yml/badge.svg)](https://github.com/liquibase/liquibase-cassandra/actions/workflows/build.yml)-->
 ===================
 
-Liquibase extension for Cassandra Support.
+Liquibase extension for AWS Keyspace Support.
 
+### Setup Cloud Testing Environment
 
-### Setup local test environment
+To set up a Keyspace for testing you should do the following:
 
-start cassandra
+1. Set up your AWS Credentials for terraform
+2. Run `terraform apply -auto-approve` to create the Keyspace in AWS.
+3. Run your tests with `maven test`
+4. Run `terraform apply -destroy` to remove the Keyspace in AWS.
 
-`docker run -p 9042:9042 --rm --name mycassandra -d cassandra`
-
-get ip
-
-`docker inspect mycassandra`
- 
-start another instance for cqlsh, check for IP address, replace mentioned IP with the one inspect command shows
-
-`docker run -it --rm cassandra bash`
-
-`> cqlsh 172.17.0.2`
-
-execute the following CQL:
-
-```
-CREATE KEYSPACE betterbotz
-  WITH REPLICATION = { 
-   'class' : 'SimpleStrategy', 
-   'replication_factor' : 1 
-  };
-```
